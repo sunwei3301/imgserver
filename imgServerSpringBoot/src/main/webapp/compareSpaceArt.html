@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aa.html</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=utf-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+
+  <!--  <form action="http://124.133.230.233:9084/85Paipai/app/imageResource/IUploadSource.jhtml" method="post" enctype="multipart/form-data"> -->
+ <!--  <form action="http://127.0.0.1:8080/pictureServices/uploadImgByBuyer" method="post" enctype="multipart/form-data">-->
+    <form action="http://127.0.0.1:8080/pictureServer/uploadImgByBuyer" method="post" enctype="multipart/form-data">
+     <input type="file" name="file" value="选择"/>
+      <input type="hidden" name="productionId" value="252"/>
+      <input type="hidden" name="token" value="540a1daf-7c7b-4f8d-811d-14383229bdea"/>
+      <input type="hidden" name="upload_width" value="60"/>
+      <input type="hidden" name="upload_height" value="50"/>  
+      <input type="hidden" name="sourceUrl" value="http://124.133.230.234:8090/imgDetail/201811/20181121/8fb0ae073b0f4b0686b7803d86b3caf0.jpg"/>    
+     <input id="submit_form" type="submit" class="btn btn-success save" value="保存1"/>
+</form>
+
+
+
+    
+  </body>
+</html>

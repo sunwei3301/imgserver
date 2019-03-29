@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imgServer.dao.ImgServerDao">
+    
+	
+	<insert id="insert"  parameterType="Map">
+		INSERT INTO pp_source (
+			
+			imgdir,
+			artwork_id,
+			imagename,
+			create_date,
+			member,
+			upload_width,
+			upload_height,
+			imgIndex,
+			del_flag,
+			flag,
+			multiple
+		)values(
+			
+		    #{imgdir},
+			#{productionId},
+			#{imagename},
+			#{create_date},
+			#{userID},
+			#{upload_width},
+			#{upload_height},
+			#{imgIndex},
+			'0',
+			'0',
+		 #{multiple}
+		)
+	</insert>
+	
+		
+	<select id="findUser" resultType="Map">
+	   SELECT a.user_id,zhdlsj FROM yee_member_token a WHERE a.token =#{token}
+	</select>
+	
+	<insert id="insertByBuyer"  parameterType="Map">
+		INSERT INTO pp_source_buyer (
+			imgdir,
+			artwork_id,
+			imagename,
+			create_date,
+			member,
+			upload_width,
+			upload_height,
+			del_flag
+			
+		)values(
+		    #{imgdir},
+			#{productionId},
+			#{imagename},
+			#{create_date},
+			#{userID},
+			#{upload_width},
+			#{upload_height},
+			'0'
+		
+		)
+	</insert>
+	
+	
+	
+	<select id="findSourceByIndex" resultType="Map">
+	   SELECT 
+	     id,
+	     imgdir,
+			artwork_id,
+			imagename,
+			create_date,
+			member,
+			upload_width,
+			upload_height,
+			imgIndex,
+			del_flag
+			from pp_source where imgIndex= #{imgIndex} and artwork_id= #{productionId} and member=#{userID} and del_flag='0'
+			
+	</select>
+	
+	
+	<update id="updateSourceByIndex" >
+	   update  pp_source set del_flag='1' where id= #{id}
+     </update>
+     
+     
+     <select id="findImgByBuyer" resultType="Map">
+	   SELECT 
+	      id,
+	      imgdir,
+			artwork_id,
+			imagename,
+			create_date,
+			member,
+			upload_width,
+			upload_height,
+			
+			del_flag
+			from pp_source_buyer where  artwork_id= #{productionId} and member=#{userID} and del_flag='0'
+	</select>
+	
+	<update id="updateImgByBuyer" >
+	   update  pp_source_buyer set del_flag='1' where id=#{id} 
+     </update>
+     
+      <select id="findImgBySeller" resultType="Map">
+			   SELECT
+				c.imagename,
+				c.imgdir,
+				c.upload_width,
+				c.upload_height,
+				c.multiple
+			FROM
+				pp_source c
+			WHERE
+				1 = 1
+			AND c.flag = '1'
+			AND c.artwork_id =#{productionId}
+			AND c.del_flag = '0'
+			AND c.multiple = '120'
+	</select>
+	
+	
+	<update id="updatePortrait" >
+	   update  yee_member set attribute_value0=#{imagename}, attribute_value1=#{imgdir} where id=#{userID} 
+     </update>
+     
+     
+     <select id="findMemberPortrait"  resultType="Map">
+          SELECT
+                   id,
+				attribute_value0 as  imagename,
+				attribute_value1 as imgdir
+			FROM
+				yee_member 
+			WHERE
+				1 = 1 and
+			id=#{userID} 
+     </select>
+     
+</mapper>
